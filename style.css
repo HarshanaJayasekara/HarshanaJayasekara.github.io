@@ -104,7 +104,7 @@ nav .navlinks li a{
     transform: scale(1.2);
 }
 .hero-text{
-    max-width: 500px;
+    max-width: 600px;
     display: flex;
     flex-direction: column;
 }
