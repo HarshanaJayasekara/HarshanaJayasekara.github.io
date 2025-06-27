@@ -2,37 +2,191 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Responsive Portfolio Website Design</title>
+    <title>Harshana Jayasekara - Software Engineer Portfolio</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link rel="stylesheet" href="style.css">
-    <!----Font awesome cdn  font icon css -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css">
+    <style>
+        /* Define custom CSS variables for a consistent professional theme */
+        :root {
+            --bg-dark-primary: #1A202C; /* Deep Charcoal/Dark Blue-Grey */
+            --bg-dark-secondary: #2D3748; /* Slightly lighter Charcoal for cards */
+            --text-light-primary: #E2E8F0; /* Off-white for main text */
+            --text-light-secondary: #CBD5E0; /* Lighter grey for descriptions */
+            --accent-blue: #4299E1; /* Professional blue for links, buttons */
+            --accent-teal: #38B2AC; /* Subtle teal for highlights/active states */
+            --border-color: #4A5568; /* Darker border for separation */
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-dark-primary);
+            color: var(--text-light-primary);
+        }
+
+        /* Navigation buttons */
+        .nav-button {
+            background-color: var(--bg-dark-secondary);
+            color: var(--text-light-primary);
+            transition: background-color 0.3s ease, color 0.3s ease;
+            border: 1px solid var(--border-color);
+        }
+        .nav-button:hover {
+            background-color: var(--accent-blue);
+            color: white;
+        }
+
+        /* Main container cards (home, project details, etc.) */
+        .container-card {
+            background-color: var(--bg-dark-secondary);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+            border: 1px solid var(--border-color);
+        }
+
+        /* Profile image container */
+        .profile-image-container {
+            border: 4px solid var(--accent-teal);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+        }
+
+        /* General content cards (project cards, certificate cards, etc.) */
+        .content-card {
+            background-color: var(--bg-dark-secondary);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+            transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+            border: 1px solid var(--border-color);
+        }
+        .content-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Filter buttons */
+        .filter-button {
+            background-color: var(--bg-dark-secondary);
+            color: var(--text-light-secondary);
+            transition: background-color 0.3s ease, color 0.3s ease;
+            border: 1px solid var(--border-color);
+        }
+        .filter-button:hover {
+            background-color: var(--border-color);
+            color: var(--text-light-primary);
+        }
+        .filter-button.active {
+            background-color: var(--accent-teal);
+            color: white;
+            font-weight: 600;
+            border-color: var(--accent-teal);
+        }
+
+        /* Project detail specific styles */
+        .project-detail-card {
+            background-color: var(--bg-dark-secondary);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.5);
+            border: 1px solid var(--border-color);
+        }
+
+        /* Code block styling */
+        .code-block-container {
+            background-color: #23272e; /* Darker background for code */
+            border: 1px solid var(--border-color);
+        }
+        .code-block-container pre code {
+            color: #ABB2BF; /* Light code text */
+        }
+        /* Custom scrollbar for code block */
+        .code-block-container::-webkit-scrollbar {
+            height: 8px;
+            width: 8px;
+        }
+        .code-block-container::-webkit-scrollbar-track {
+            background: var(--bg-dark-primary);
+            border-radius: 10px;
+        }
+        .code-block-container::-webkit-scrollbar-thumb {
+            background: var(--border-color);
+            border-radius: 10px;
+        }
+        .code-block-container::-webkit-scrollbar-thumb:hover {
+            background: #718096;
+        }
+
+        /* Links and icons */
+        a {
+            color: var(--accent-blue);
+        }
+        a:hover {
+            color: var(--accent-teal);
+        }
+        .bg-accent-blue { /* For code link button */
+            background-color: var(--accent-blue);
+        }
+        .bg-accent-teal { /* For demo link button */
+            background-color: var(--accent-teal);
+        }
+        .bg-accent-blue, .bg-accent-teal { /* Ensure consistent text color for these buttons */
+            color: white !important;
+        }
+
+        /* Adjust text colors for various elements within the dark theme */
+        .text-gray-700 {
+            color: var(--text-light-secondary); /* General paragraph text */
+        }
+        .text-gray-800 {
+            color: var(--text-light-primary); /* Main headings */
+        }
+        .text-gray-600 {
+            color: var(--text-light-secondary); /* Smaller descriptions/muted text */
+        }
+        .text-gray-500 {
+            color: var(--text-light-secondary); /* Dates and less prominent text */
+        }
+        .text-gray-300 {
+            color: #CBD5E0; /* For intro text and full article content */
+        }
+        .text-gray-400 {
+            color: #A0AEC0; /* Slightly darker light text */
+        }
+        .text-gray-100 {
+            color: #F7FAFC; /* Pure white for main titles/prominent text */
+        }
+
+        /* Explicitly style elements within #detail-project-full-article to ensure readability */
+        #detail-project-full-article p,
+        #detail-project-full-article ul,
+        #detail-project-full-article li,
+        #detail-project-full-article h3 {
+            color: var(--text-light-secondary); /* Default text color for article content */
+        }
+        #detail-project-full-article h3 {
+            color: var(--text-light-primary); /* Headings inside article content */
+        }
+        #detail-project-full-article ul {
+            list-style-type: disc;
+            margin-left: 1.5rem;
+        }
+    </style>
 </head>
-<body>
-     <div class="hero-header">
-        <div class="wrapper">
-            <header>
-                <div class="logo">
-                    <i class="fa-solid fa-h"></i>
-                    <div class="logo-text">Harshana Jayasekara</div>
-                </div>
-                <nav>
-                    <div class="togglebtn">
-                        <span></span>
-                        <span></span>
-                        <span></span>
-                    </div>
-                    <ul class="navlinks">
-                        <li><a href="#">Home</a></li>
-                        <li><a href="#">Portfolio</a></li>
-                        <li><a href="#">Resume</a></li>
-                        <li><a href="#">Blog</a></li>
-                        <li><a href="#">Contact</a></li>
-                    </ul>
-                </nav>
-            </header>
-            <div class="container">
+<body class="flex flex-col items-center min-h-screen py-8 px-4 sm:px-6 lg:px-8">
+
+    <!-- Navigation Buttons -->
+    <nav class="flex justify-center space-x-4 mb-8">
+        <button id="home-button" class="nav-button px-6 py-2 rounded-full font-semibold border-2">Home</button>
+        <button id="project-button" class="nav-button px-6 py-2 rounded-full font-semibold border-2">Project</button>
+        <button id="certificate-button" class="nav-button px-6 py-2 rounded-full font-semibold border-2">Certificate</button>
+        <button id="experiment-button" class="nav-button px-6 py-2 rounded-full font-semibold border-2">Experiment</button>
+        <button id="articles-button" class="nav-button px-6 py-2 rounded-full font-semibold border-2">Articles</button>
+    </nav>
+
+    <!-- Main Content Card (Home Section - Redesigned) -->
+    <main id="home-section" class="container-card w-full max-w-5xl p-8 md:p-12 rounded-2xl flex flex-col space-y-8">
+        <!-- Top Header Area -->
+        
+
+        <!-- Two-Column Content Area -->
+         <div class="container">
                  <div class="hero-pic">
                     <img src="images/FC_20210220_0001.jpeg" alt="profile pic">
                  </div>
@@ -55,27 +209,929 @@
                     </div>
                  </div>
             </div>
+        
+
+            <!-- Right Column: Introduction Text -->
+          
+
+        <!-- Bottom Grid of Cards -->
+        
+    </main>
+
+    <!-- Project Section -->
+    <section id="project-section" class="hidden w-full max-w-5xl py-8 px-4 sm:px-6 lg:px-8">
+        <button class="back-button mb-6 px-4 py-2 rounded-full nav-button flex items-center border-2">
+            <i class="fas fa-arrow-left mr-2"></i> Back
+        </button>
+
+        <h2 class="text-3xl font-bold text-gray-100 mb-6 text-center">My Projects</h2>
+
+        <!-- Search and Filter -->
+        <div id="project-controls" class="flex flex-col sm:flex-row justify-between items-center mb-8 space-y-4 sm:space-y-0 sm:space-x-4">
+            <input type="text" id="project-search-bar" placeholder="Search projects..." class="w-full sm:w-1/3 p-3 rounded-full border border-gray-600 focus:outline-none focus:ring-2 focus:ring-accent-blue bg-gray-700 text-white placeholder-gray-400">
+            <div class="flex flex-wrap justify-center sm:justify-end space-x-2 sm:space-x-4">
+                <button class="filter-button px-4 py-2 rounded-full font-semibold active border-2" data-category="all">All</button>
+                <button class="filter-button px-4 py-2 rounded-full font-semibold border-2" data-category="frontend">Frontend</button>
+                <button class="filter-button px-4 py-2 rounded-full font-semibold border-2" data-category="backend">Backend</button>
+                <button class="filter-button px-4 py-2 rounded-full font-semibold border-2" data-category="ml">Machine Learning</button>
+            </div>
         </div>
-     </div>
-     <!---typed js for typing text effect-->
-     <script src="https://cdnjs.cloudflare.com/ajax/libs/typed.js/2.0.10/typed.min.js"></script>
-     <script>
-        /** creating button click show hide navbar **/
-        var togglebtn=document.querySelector(".togglebtn");
-        var nav=document.querySelector(".navlinks");
-        var links=document.querySelector(".navlinks li");
 
-        togglebtn.addEventListener("click", function(){
-            this.classList.toggle("click");
-            nav.classList.toggle("open");
-        })
+        <!-- Project Grid -->
+        <div id="project-grid" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+            <!-- Project cards will be dynamically loaded here by JS -->
+        </div>
 
-        var typed=new Typed(".input",{
-            strings:["Frontend Developer","UI/UX Designer","Web Developer","Mobile App Developer","Software Developer"],
-            typedSpeed:70,
-            backSpeed:55,
-            loop:true
-        })
-     </script>
+        <!-- Project Detail View (Initially Hidden) -->
+        <div id="project-detail-view" class="hidden project-detail-card rounded-lg p-6 sm:p-8 mt-8">
+            <button id="back-to-projects-grid" class="mb-6 px-4 py-2 rounded-full nav-button flex items-center border-2">
+                <i class="fas fa-arrow-left mr-2"></i> Back to Projects
+            </button>
+
+            <!-- Project Demo Preview Image -->
+            <img id="detail-project-demo-preview" src="" alt="Project Demo Preview" class="w-full h-64 sm:h-80 object-contain rounded-lg bg-gray-800 mb-6 border border-gray-600">
+
+            <h3 id="detail-project-title" class="font-bold text-3xl mb-4 text-gray-100"></h3>
+
+            <!-- Full Article-like Description -->
+            <div id="detail-project-full-article" class="text-gray-300 leading-relaxed mb-6">
+                <!-- Content will be injected here -->
+            </div>
+
+            <h4 class="font-bold text-xl mb-3 text-gray-100 border-b border-gray-700 pb-2">Code Snippet</h4>
+            <!-- Code Snippet -->
+            <div class="bg-gray-800 rounded-lg p-4 mb-6 overflow-x-auto code-block-container">
+                <pre><code id="detail-project-code-snippet" class="language-javascript text-sm">
+// Sample code will be loaded here
+                </code></pre>
+            </div>
+
+            <!-- Links -->
+            <div class="flex flex-wrap gap-4">
+                <a id="detail-project-code-link" href="#" target="_blank" class="bg-accent-blue text-white px-6 py-3 rounded-full font-semibold hover:bg-blue-700 transition duration-300 flex items-center shadow-lg">
+                    <i class="fas fa-code mr-2"></i> View Code
+                </a>
+                <a id="detail-project-demo-link" href="#" target="_blank" class="bg-accent-teal text-white px-6 py-3 rounded-full font-semibold hover:bg-teal-700 transition duration-300 flex items-center shadow-lg">
+                    <i class="fas fa-play-circle mr-2"></i> Live Demo
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Certificate Section -->
+    <section id="certificate-section" class="hidden w-full max-w-5xl py-8 px-4 sm:px-6 lg:px-8">
+        <button class="back-button mb-6 px-4 py-2 rounded-full nav-button flex items-center border-2">
+            <i class="fas fa-arrow-left mr-2"></i> Back
+        </button>
+
+        <h2 class="text-3xl font-bold text-gray-100 mb-6 text-center">My Certificates</h2>
+
+        <div id="certificate-grid" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+            <!-- Certificate cards will be dynamically loaded here by JS -->
+        </div>
+    </section>
+
+    <!-- Experiment Section -->
+    <section id="experiment-section" class="hidden w-full max-w-5xl py-8 px-4 sm:px-6 lg:px-8">
+        <button class="back-button mb-6 px-4 py-2 rounded-full nav-button flex items-center border-2">
+            <i class="fas fa-arrow-left mr-2"></i> Back
+        </button>
+
+        <h2 class="text-3xl font-bold text-gray-100 mb-6 text-center">My Experiments</h2>
+
+        <div id="experiment-grid" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+            <!-- Experiment cards will be dynamically loaded here by JS -->
+        </div>
+    </section>
+
+    <!-- Articles Section -->
+    <section id="articles-section" class="hidden w-full max-w-5xl py-8 px-4 sm:px-6 lg:px-8">
+        <button class="back-button mb-6 px-4 py-2 rounded-full nav-button flex items-center border-2">
+            <i class="fas fa-arrow-left mr-2"></i> Back
+        </button>
+
+        <h2 class="text-3xl font-bold text-gray-100 mb-6 text-center">My Articles</h2>
+
+        <div id="articles-list" class="flex flex-col gap-6">
+            <!-- Article cards will be dynamically loaded here by JS -->
+        </div>
+    </section>
+
+
+    <script>
+        // --- Data for different sections ---
+        const projects = [
+            {
+                id: "ecommerce",
+                title: "E-commerce Website",
+                image: "https://placehold.co/400x250/2D3748/E2E8F0?text=E-commerce+Platform",
+                description: "A full-fledged e-commerce platform built with MERN stack.",
+                fullArticle: `
+                    <p class="text-gray-300">This project involved building a comprehensive e-commerce platform from scratch, mimicking the functionalities of popular online retail stores. The goal was to create a robust and scalable solution capable of handling user interactions, product management, and secure transactions.</p>
+                    <h3 class="font-bold text-xl mt-4 mb-2 text-gray-100">Key Features:</h3>
+                    <ul class="list-disc list-inside ml-4 text-gray-300">
+                        <li>User Authentication & Authorization (Login, Registration, JWT)</li>
+                        <li>Product Catalog Management (Add, Edit, Delete products by Admin)</li>
+                        <li>Shopping Cart & Checkout Process</li>
+                        <li>Order History and Status Tracking</li>
+                        <li>Secure Payment Gateway Integration (e.g., Stripe placeholder)</li>
+                        <li>Responsive design for various devices.</li>
+                    </ul>
+                    <h3 class="font-bold text-xl mt-4 mb-2 text-gray-100">Technologies Used:</h3>
+                    <ul class="list-disc list-inside ml-4 text-gray-300">
+                        <li>Frontend: React, Tailwind CSS</li>
+                        <li>Backend: Node.js, Express.js</li>
+                        <li>Database: MongoDB</li>
+                        <li>Authentication: JSON Web Tokens (JWT)</li>
+                    </ul>
+                    <p class="mt-4 text-gray-300">The development process emphasized modularity and reusability, ensuring a maintainable codebase. Extensive testing was conducted to ensure all functionalities performed as expected and edge cases were handled gracefully.</p>
+                `,
+                codeSnippet: `
+// Example of a React component for a product card
+import React from 'react';
+
+const ProductCard = ({ product }) => {
+    return (
+        <div className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-300">
+            <img src={product.imageUrl} alt={product.name} className="w-full h-48 object-cover" />
+            <div className="p-4">
+                <h3 className="text-xl font-semibold mb-2">{product.name}</h3>
+                <p className="text-gray-600 text-sm mb-3">{product.description}</p>
+                <div className="flex justify-between items-center">
+                    <span className="text-lg font-bold text-green-600">$${"{"}product.price.toFixed(2)}{"}"}</span>
+                    <button className="bg-blue-500 text-white px-4 py-2 rounded-full text-sm hover:bg-blue-600 transition-colors">
+                        Add to Cart
+                    </button>
+                </div>
+            </div>
+        </div>
+    );
+};
+
+export default ProductCard;
+                `,
+                demoPreviewImage: "https://placehold.co/600x400/2D3748/E2E8F0?text=E-commerce+Demo+Preview",
+                codeLink: "https://github.com/your-username/ecommerce-repo",
+                demoLink: "https://your-ecommerce-demo.com"
+            },
+            {
+                id: "dashboard",
+                title: "Data Visualization Dashboard",
+                image: "https://placehold.co/400x250/2D3748/E2E8F0?text=Interactive+Dashboard",
+                description: "Interactive dashboard using D3.js to visualize large datasets.",
+                fullArticle: `
+                    <p class="text-gray-300">This project focused on creating an interactive data visualization dashboard to help users understand complex datasets at a glance. It integrates various chart types and filtering options to provide dynamic insights.</p>
+                    <h3 class="font-bold text-xl mt-4 mb-2 text-gray-100">Features:</h3>
+                    <ul class="list-disc list-inside ml-4 text-gray-300">
+                        <li>Dynamic Bar Charts, Line Graphs, Pie Charts using D3.js</li>
+                        <li>Real-time Data Updates (simulated/from API)</li>
+                        <li>Filtering and Sorting Capabilities</li>
+                        <li>Responsive Layout for different screen sizes.</li>
+                    </ul>
+                    <h3 class="font-bold text-xl mt-4 mb-2 text-gray-100">Technologies:</h3>
+                    <ul class="list-disc list-inside ml-4 text-gray-300">
+                        <li>Frontend: HTML, CSS, JavaScript (D3.js, React for structure)</li>
+                        <li>Backend: Node.js (for serving data, if applicable)</li>
+                    </ul>
+                    <p class="mt-4 text-gray-300">The dashboard was designed with user experience in mind, ensuring ease of navigation and clear presentation of data. Performance optimization was crucial for handling large volumes of data smoothly.</p>
+                `,
+                codeSnippet: `
+// Example D3.js code for a simple bar chart
+const data = [10, 20, 30, 40, 50];
+const svgWidth = 500, svgHeight = 300;
+const barPadding = 5;
+const barWidth = (svgWidth / data.length);
+
+const svg = d3.select("#chart-container")
+    .append("svg")
+    .attr("width", svgWidth)
+    .attr("height", svgHeight);
+
+svg.selectAll("rect")
+    .data(data)
+    .enter()
+    .append("rect")
+    .attr("y", d => svgHeight - d * 5) // Scale data for height
+    .attr("height", d => d * 5)
+    .attr("width", barWidth - barPadding)
+    .attr("transform", (d, i) => {
+        const translate = [barWidth * i, 0];
+        return "translate(" + translate + ")";
+    })
+    .attr("fill", "teal");
+
+svg.selectAll("text")
+    .data(data)
+    .enter()
+    .append("text")
+    .text(d => d)
+    .attr("x", (d, i) => barWidth * i + barWidth / 2)
+    .attr("y", d => svgHeight - d * 5 - 10)
+    .attr("text-anchor", "middle")
+    .attr("fill", "black");
+                `,
+                demoPreviewImage: "https://placehold.co/600x400/2D3748/E2E8F0?text=Dashboard+Demo+Preview",
+                codeLink: "https://github.com/your-username/data-dashboard-repo",
+                demoLink: "https://your-dashboard-demo.com"
+            },
+            // Add more projects here with fullArticle, codeSnippet, and demoPreviewImage
+            {
+                id: "api-service",
+                title: "RESTful API Service",
+                image: "https://placehold.co/400x250/2D3748/E2E8F0?text=Backend+API",
+                description: "Robust backend API for a mobile application using Node.js and Express.",
+                fullArticle: `
+                    <p class="text-gray-300">Developed a robust and scalable RESTful API to power a mobile application. This backend service handles all data operations, user authentication, and business logic, ensuring a seamless experience for mobile users.</p>
+                    <h3 class="font-bold text-xl mt-4 mb-2 text-gray-100">Core Functionalities:</h3>
+                    <ul class="list-disc list-inside ml-4 text-gray-300">
+                        <li>User management (registration, login, profile updates)</li>
+                        <li>Data CRUD operations (e.g., for products, posts, etc.)</li>
+                        <li>Authentication using JSON Web Tokens (JWT)</li>
+                        <li>Error handling and input validation</li>
+                        <li>Rate limiting and security enhancements</li>
+                    </ul>
+                    <h3 class="font-bold text-xl mt-4 mb-2 text-gray-100">Technologies:</h3>
+                    <ul class="list-disc list-inside ml-4 text-gray-300">
+                        <li>Node.js, Express.js</li>
+                        <li>Database: PostgreSQL with Sequelize ORM</li>
+                        <li>Authentication: Passport.js (optional, can be JWT only)</li>
+                    </ul>
+                    <p class="mt-4 text-gray-300">The API was designed with clear endpoint structures and comprehensive documentation to facilitate easy integration with the frontend. Performance was optimized through efficient database queries and caching strategies.</p>
+                `,
+                codeSnippet: `
+// Example of an Express.js route for getting all products
+const express = require('express');
+const router = express.Router();
+const Product = require('../models/Product'); // Assuming a Product model
+
+router.get('/products', async (req, res) => {
+    try {
+        const products = await Product.findAll();
+        res.json(products);
+    } catch (err) {
+        console.error(err.message);
+        res.status(500).send('Server Error');
+    }
+});
+
+router.post('/products', async (req, res) => {
+    const { name, price, description } = req.body;
+    try {
+        const newProduct = await Product.create({ name, price, description });
+        res.json(newProduct);
+    } catch (err) {
+        console.error(err.message);
+        res.status(500).send('Server Error');
+    }
+});
+
+module.exports = router;
+                `,
+                demoPreviewImage: "https://placehold.co/600x400/2D3748/E2E8F0?text=API+Service+Demo+Preview",
+                codeLink: "https://github.com/your-username/api-service-repo",
+                demoLink: "https://your-api-docs.com"
+            },
+            {
+                id: "image-classification",
+                title: "Image Classification Model",
+                image: "https://placehold.co/400x250/2D3748/E2E8F0?text=ML+Classification",
+                description: "Deep learning model for classifying images of various objects.",
+                fullArticle: `
+                    <p class="text-gray-300">This project involved developing and training a deep learning model for image classification. The goal was to accurately identify objects within images, demonstrating practical application of Convolutional Neural Networks (CNNs).</p>
+                    <h3 class="font-bold text-xl mt-4 mb-2 text-gray-100">Methodology:</h3>
+                    <ul class="list-disc list-inside ml-4 text-gray-300">
+                        <li>Data collection and preprocessing (resizing, normalization, augmentation)</li>
+                        <li>Model architecture design (various CNN layers)</li>
+                        <li>Training with backpropagation and optimization algorithms</li>
+                        <li>Performance evaluation (accuracy, precision, recall, F1-score)</li>
+                    </ul>
+                    <h3 class="font-bold text-xl mt-4 mb-2 text-gray-100">Technologies:</h3>
+                    <ul class="list-disc list-inside ml-4 text-gray-300">
+                        <li>Python</li>
+                        <li>TensorFlow/Keras</li>
+                        <li>Numpy, Matplotlib</li>
+                    </ul>
+                    <p class="mt-4 text-gray-300">The project highlighted the importance of data quality and hyperparameter tuning in achieving high model performance. Future work includes exploring more advanced architectures and deployment strategies.</p>
+                `,
+                codeSnippet: `
+# Example Python code for a simple CNN in Keras
+from tensorflow.keras.models import Sequential
+from tensorflow.keras.layers import Conv2D, MaxPooling2D, Flatten, Dense
+
+def create_cnn_model(input_shape, num_classes):
+    model = Sequential([
+        Conv2D(32, (3, 3), activation='relu', input_shape=input_shape),
+        MaxPooling2D((2, 2)),
+        Conv2D(64, (3, 3), activation='relu'),
+        MaxPooling2D((2, 2)),
+        Flatten(),
+        Dense(128, activation='relu'),
+        Dense(num_classes, activation='softmax')
+    ])
+    model.compile(optimizer='adam',
+                  loss='sparse_categorical_crossentropy',
+                  metrics=['accuracy'])
+    return model
+
+# Example usage:
+# model = create_cnn_model((64, 64, 3), 10)
+# model.summary()
+                `,
+                demoPreviewImage: "https://placehold.co/600x400/2D3748/E2E8F0?text=ML+Image+Demo",
+                codeLink: "https://github.com/your-username/image-classifier-repo",
+                demoLink: "https://your-ml-demo.com"
+            },
+            {
+                id: "chat-app",
+                title: "Real-time Chat Application",
+                image: "https://placehold.co/400x250/2D3748/E2E8F0?text=Chat+Application",
+                description: "Real-time chat application with WebSockets.",
+                fullArticle: `
+                    <p class="text-gray-300">A real-time chat application designed to provide instant messaging capabilities between multiple users. It leverages WebSockets for efficient communication and a robust backend for message handling and user presence.</p>
+                    <h3 class="font-bold text-xl mt-4 mb-2 text-gray-100">Key Aspects:</h3>
+                    <ul class="list-disc list-inside ml-4 text-gray-300">
+                        <li>Instant message sending and receiving</li>
+                        <li>User online/offline status</li>
+                        <li>Room-based chat functionality</li>
+                        <li>Persistent message storage (optional, can be added)</li>
+                    </ul>
+                    <h3 class="font-bold text-xl mt-4 mb-2 text-gray-100">Technologies:</h3>
+                    <ul class="list-disc list-inside ml-4 text-gray-300">
+                        <li>Frontend: React, Tailwind CSS</li>
+                        <li>Backend: Node.js, Express.js, Socket.IO</li>
+                        <li>Database: MongoDB (for user data and message history)</li>
+                    </ul>
+                    <p class="mt-4 text-gray-300">This project was a great exercise in understanding WebSocket communication protocols and building responsive user interfaces for real-time applications.</p>
+                `,
+                codeSnippet: `
+// Example Socket.IO event handling on the server-side
+const express = require('express');
+const app = express();
+const http = require('http');
+const server = http.createServer(app);
+const { Server } = require('socket.io');
+const io = new Server(server);
+
+io.on('connection', (socket) => {
+  console.log('a user connected');
+
+  socket.on('chat message', (msg) => {
+    io.emit('chat message', msg); // Broadcast message to all connected clients
+  });
+
+  socket.on('disconnect', () => {
+    console.log('user disconnected');
+  });
+});
+
+server.listen(3000, () => {
+  console.log('listening on *:3000');
+});
+                `,
+                demoPreviewImage: "https://placehold.co/600x400/2D3748/E2E8F0?text=Chat+App+Demo",
+                codeLink: "https://github.com/your-username/chat-app-repo",
+                demoLink: "https://your-chat-app.com"
+            },
+            {
+                id: "portfolio-v1",
+                title: "Portfolio Website V1",
+                image: "https://placehold.co/400x250/2D3748/E2E8F0?text=Portfolio+Design",
+                description: "My first personal portfolio website design.",
+                fullArticle: `
+                    <p class="text-gray-300">This was my initial venture into web development, creating a basic but functional personal portfolio website. The goal was to learn the fundamentals of HTML, CSS, and JavaScript and to present my early projects.</p>
+                    <h3 class="font-bold text-xl mt-4 mb-2 text-gray-100">Learnings:</h3>
+                    <ul class="list-disc list-inside ml-4 text-gray-300">
+                        <li>HTML structure and semantic elements</li>
+                        <li>CSS for styling, layout (Flexbox, Grid) and responsiveness</li>
+                        <li>Basic JavaScript for interactive elements (e.g., navigation toggles)</li>
+                        <li>Deployment process using static hosting</li>
+                    </ul>
+                    <h3 class="font-bold text-xl mt-4 mb-2 text-gray-100">Technologies:</h3>
+                    <ul class="list-disc list-inside ml-4 text-gray-300">
+                        <li>HTML5</li>
+                        <li>CSS3</li>
+                        <li>Vanilla JavaScript</li>
+                    </ul>
+                    <p class="mt-4 text-gray-300">This project served as a foundational learning experience, introducing me to the core concepts of web design and development that I later built upon in more complex projects.</p>
+                `,
+                codeSnippet: `
+<!-- Example HTML structure for a simple navigation bar -->
+<nav class="navbar">
+    <div class="container">
+        <a href="#" class="logo">My Portfolio</a>
+        <ul class="nav-links">
+            <li><a href="#home">Home</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#projects">Projects</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+    </div>
+</nav>
+
+/* Example CSS for the navigation bar */
+.navbar {
+    background-color: #333;
+    padding: 1rem 0;
+}
+.navbar .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+.navbar .logo {
+    color: white;
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+.navbar .nav-links {
+    display: flex;
+    list-style: none;
+}
+.navbar .nav-links li a {
+    color: white;
+    padding: 0.5rem 1rem;
+    text-decoration: none;
+    transition: background-color 0.3s;
+}
+.navbar .nav-links li a:hover {
+    background-color: #555;
+    border-radius: 5px;
+}
+                `,
+                demoPreviewImage: "https://placehold.co/600x400/2D3748/E2E8F0?text=Portfolio+V1+Demo",
+                codeLink: "https://github.com/your-username/portfolio-v1-repo",
+                demoLink: "https://your-portfolio-v1.com"
+            },
+             {
+                id: "recommender-system",
+                title: "Recommendation System",
+                image: "https://placehold.co/400x250/2D3748/E2E8F0?text=Recommender",
+                description: "A machine learning model for personalized recommendations.",
+                fullArticle: `
+                    <p class="text-gray-300">Developed a recommendation engine capable of suggesting personalized items (e.g., movies, products) to users based on their past interactions and similarities with other users. This project highlights collaborative filtering techniques.</p>
+                    <h3 class="font-bold text-xl mt-4 mb-2 text-gray-100">Approach:</h3>
+                    <ul class="list-disc list-inside ml-4 text-gray-300">
+                        <li>Utilized user-item interaction data (ratings, views).</li>
+                        <li>Implemented collaborative filtering (user-based and item-based).</li>
+                        <li>Evaluated model performance using metrics like RMSE.</li>
+                        <li>Designed a simple interface for demonstrating recommendations.</li>
+                    </ul>
+                    <h3 class="font-bold text-xl mt-4 mb-2 text-gray-100">Technologies:</h3>
+                    <ul class="list-disc list-inside ml-4 text-gray-300">
+                        <li>Python</li>
+                        <li>Surprise library (for recommendation algorithms)</li>
+                        <li>Pandas, NumPy for data manipulation</li>
+                    </ul>
+                    <p class="mt-4 text-gray-300">The system can be extended to incorporate content-based filtering and hybrid approaches for more sophisticated recommendations in real-world applications.</p>
+                `,
+                codeSnippet: `
+# Example Python code for user-based collaborative filtering with Surprise
+from surprise import Dataset, Reader
+from surprise import KNNBasic
+from surprise.model_selection import train_test_split
+from surprise import accuracy
+
+# Load dataset (e.g., movielens-100k)
+reader = Reader(line_format='user item rating timestamp', sep='\t')
+data = Dataset.load_from_file('./ml-100k/u.data', reader=reader)
+
+# Split data into training and test sets
+trainset, testset = train_test_split(data, test_size=.25, random_state=42)
+
+# Use user-based collaborative filtering
+algo = KNNBasic(sim_options={'user_based': True})
+
+# Train the algorithm on the trainset
+algo.fit(trainset)
+
+# Predict ratings for the testset
+predictions = algo.test(testset)
+
+# Then compute RMSE
+accuracy.rmse(predictions)
+
+# To get a prediction for a specific user and item
+# uid = str(196)  # raw user id
+# iid = str(302)  # raw item id
+# pred = algo.predict(uid, iid, r_ui=4, verbose=True)
+                `,
+                demoPreviewImage: "https://placehold.co/600x400/2D3748/E2E8F0?text=Recommender+Demo",
+                codeLink: "https://github.com/your-username/recommender-repo",
+                demoLink: "https://your-recommender-demo.com"
+            },
+            {
+                id: "task-manager",
+                title: "Task Management App",
+                image: "https://placehold.co/400x250/2D3748/E2E8F0?text=Task+Manager",
+                description: "A web application for managing daily tasks and to-do lists.",
+                fullArticle: `
+                    <p class="text-gray-300">A simple and intuitive web-based task management application designed to help users organize their daily tasks and improve productivity. It provides features to add, delete, mark as complete, and filter tasks.</p>
+                    <h3 class="font-bold text-xl mt-4 mb-2 text-gray-100">Functionality:</h3>
+                    <ul class="list-disc list-inside ml-4 text-gray-300">
+                        <li>Create, Read, Update, Delete (CRUD) tasks</li>
+                        <li>Mark tasks as completed</li>
+                        <li>Filter tasks by status (all, active, completed)</li>
+                        <li>Responsive user interface</li>
+                    </ul>
+                    <h3 class="font-bold text-xl mt-4 mb-2 text-gray-100">Technologies:</h3>
+                    <ul class="list-disc list-inside ml-4 text-gray-300">
+                        <li>Frontend: React, Context API for state management</li>
+                        <li>Styling: Tailwind CSS</li>
+                        <li>Backend: Simple Express.js server (optional, could use local storage for demo)</li>
+                    </ul>
+                    <p class="mt-4 text-gray-300">This project emphasized clean code architecture, component-based development in React, and efficient state management for a smooth user experience.</p>
+                `,
+                codeSnippet: `
+// Example of a React TaskItem component
+import React from 'react';
+
+const TaskItem = ({ task, onToggleComplete, onDeleteTask }) => {
+    return (
+        <div className="flex items-center justify-between p-4 bg-white rounded-lg shadow mb-3">
+            <span className={\`text-lg \${"{"}task.completed ? 'line-through text-gray-500' : 'text-gray-800'}{"}"}\`}>
+                {"{"}task.text}{"}"}
+            </span>
+            <div>
+                <button
+                    onClick={() => onToggleComplete(task.id)}
+                    className={\`ml-2 px-3 py-1 rounded-full text-white text-sm \${"{"}task.completed ? 'bg-yellow-500' : 'bg-green-500'}{"}"} hover:\${"{"}task.completed ? 'bg-yellow-600' : 'bg-green-600'}{"}"} transition-colors\`}>
+                    {"{"}task.completed ? 'Uncomplete' : 'Complete'}{"}"}
+                </button>
+                <button
+                    onClick={() => onDeleteTask(task.id)}
+                    className="ml-2 px-3 py-1 rounded-full bg-red-500 text-white text-sm hover:bg-red-600 transition-colors">
+                    Delete
+                </button>
+            </div>
+        </div>
+    );
+};
+
+export default TaskItem;
+                `,
+                demoPreviewImage: "https://placehold.co/600x400/2D3748/E2E8F0?text=Task+App+Demo",
+                codeLink: "https://github.com/your-username/task-app-repo",
+                demoLink: "https://your-task-app.com"
+            },
+            {
+                id: "auth-system",
+                title: "User Authentication System",
+                image: "https://placehold.co/400x250/2D3748/E2E8F0?text=Auth+System",
+                description: "Secure user authentication and authorization system.",
+                fullArticle: `
+                    <p class="text-gray-300">Designed and implemented a secure and robust user authentication and authorization system. This project covers essential security practices for managing user access to web applications.</p>
+                    <h3 class="font-bold text-xl mt-4 mb-2 text-gray-100">Security Features:</h3>
+                    <ul class="list-disc list-inside ml-4 text-gray-300">
+                        <li>User registration with password hashing (Bcrypt)</li>
+                        <li>User login and session management (JWT)</li>
+                        <li>Token-based authentication for API access</li>
+                        <li>Role-based access control (RBAC)</li>
+                        <li>Input validation and error handling</li>
+                    </ul>
+                    <h3 class="font-bold text-xl mt-4 mb-2 text-gray-100">Technologies:</h3>
+                    <ul class="list-disc list-inside ml-4 text-gray-300">
+                        <li>Backend: Node.js, Express.js</li>
+                        <li>Database: MongoDB</li>
+                        <li>Security: bcryptjs, jsonwebtoken</li>
+                    </ul>
+                    <p class="mt-4 text-gray-300">This project emphasized understanding common security vulnerabilities and implementing best practices to protect user data and application resources.</p>
+                `,
+                codeSnippet: `
+// Example of user registration route in Node.js with Express and bcrypt
+const express = require('express');
+const router = express.Router();
+const bcrypt = require('bcryptjs');
+const jwt = require('jsonwebtoken');
+const User = require('../models/User'); // Assuming a User model
+
+router.post('/register', async (req, res) => {
+    const { username, email, password } = req.body;
+    try {
+        let user = await User.findOne({ email });
+        if (user) {
+            return res.status(400).json({ msg: 'User already exists' });
+        }
+
+        user = new User({ username, email, password });
+
+        const salt = await bcrypt.genSalt(10);
+        user.password = await bcrypt.hash(password, salt);
+
+        await user.save();
+
+        const payload = { user: { id: user.id } };
+        jwt.sign(payload, 'yourSecretKey', { expiresIn: 360000 }, (err, token) => {
+            if (err) throw err;
+            res.json({ token });
+        });
+
+    } catch (err) {
+        console.error(err.message);
+        res.status(500).send('Server Error');
+    }
+});
+
+module.exports = router;
+                `,
+                demoPreviewImage: "https://placehold.co/600x400/2D3748/E2E8F0?text=Auth+System+Demo",
+                codeLink: "https://github.com/your-username/auth-system-repo",
+                demoLink: "https://your-auth-system-demo.com"
+            },
+        ];
+
+        const certificates = [
+            { title: "Machine Learning Specialization", image: "https://placehold.co/300x200/2D3748/E2E8F0?text=ML+Cert", issuer: "Coursera (Stanford University)", date: "Jan 2023" },
+            { title: "Full-Stack Web Development", image: "https://placehold.co/300x200/2D3748/E2E8F0?text=Web+Dev", issuer: "Udemy", date: "Aug 2022" },
+            { title: "AWS Certified Cloud Practitioner", image: "https://placehold.co/300x200/2D3748/E2E8F0?text=AWS+Cert", issuer: "Amazon Web Services", date: "Apr 2023" },
+            { title: "Data Science with Python", image: "https://placehold.co/300x200/2D3748/E2E8F0?text=Data+Science", issuer: "DataCamp", date: "Nov 2022" },
+        ];
+
+        const experiments = [
+            { title: "Perlin Noise Generator", image: "https://placehold.co/300x200/2D3748/E2E8F0?text=Noise+Exp", description: "Experimenting with Perlin noise for procedural generation in JavaScript canvas." },
+            { title: "3D Cube Rotation (Three.js)", image: "https://placehold.co/300x200/2D3748/E2E8F0?text=3D+Cube", description: "A basic 3D cube rendered and animated using Three.js." },
+            { title: "Custom Neural Network", image: "https://placehold.co/300x200/2D3748/E2E8F0?text=NN+Exp", description: "Building a simple feedforward neural network from scratch in Python." },
+            { title: "Fluid Simulation", image: "https://placehold.co/300x200/2D3748/E2E8F0?text=Fluid+Sim", description: "Exploring basic fluid dynamics simulation using WebGL." },
+        ];
+
+        const articles = [
+            { title: "Understanding React Hooks", summary: "A deep dive into common React Hooks and how they simplify state management and side effects in functional components.", link: "#" },
+            { title: "Introduction to Big Data with Snowflake", summary: "Exploring the fundamentals of Big Data concepts and how Snowflake enables scalable data warehousing.", link: "#" },
+            { title: "Implementing JWT Authentication in MERN Stack", summary: "A step-by-step guide on setting up JSON Web Token (JWT) based authentication in a MERN stack application.", link: "#" },
+            { title: "Getting Started with TensorFlow.js", summary: "Learn how to build and train machine learning models directly in the browser using TensorFlow.js.", link: "#" },
+        ];
+
+
+        // --- DOM Element References ---
+        const homeSection = document.getElementById('home-section');
+        const projectSection = document.getElementById('project-section');
+        const certificateSection = document.getElementById('certificate-section');
+        const experimentSection = document.getElementById('experiment-section');
+        const articlesSection = document.getElementById('articles-section');
+
+        const homeButton = document.getElementById('home-button');
+        const projectButton = document.getElementById('project-button');
+        const certificateButton = document.getElementById('certificate-button');
+        const experimentButton = document.getElementById('experiment-button');
+        const articlesButton = document.getElementById('articles-button');
+        const backButtons = document.querySelectorAll('.back-button'); // Select all back buttons
+
+        const projectGrid = document.getElementById('project-grid');
+        const projectDetailView = document.getElementById('project-detail-view');
+        const backToProjectsGridButton = document.getElementById('back-to-projects-grid');
+
+        const detailProjectDemoPreview = document.getElementById('detail-project-demo-preview');
+        const detailProjectTitle = document.getElementById('detail-project-title');
+        const detailProjectFullArticle = document.getElementById('detail-project-full-article');
+        const detailProjectCodeSnippet = document.getElementById('detail-project-code-snippet');
+        const detailProjectCodeLink = document.getElementById('detail-project-code-link');
+        const detailProjectDemoLink = document.getElementById('detail-project-demo-link');
+
+        const certificateGrid = document.getElementById('certificate-grid');
+        const experimentGrid = document.getElementById('experiment-grid');
+        const articlesList = document.getElementById('articles-list');
+
+        const filterButtons = document.querySelectorAll('.filter-button');
+        const projectSearchBar = document.getElementById('project-search-bar');
+        const projectControls = document.getElementById('project-controls'); // Reference for project controls
+
+
+        // --- Helper Function to show a section and hide others ---
+        function showSection(sectionToShow) {
+            const allSections = [homeSection, projectSection, certificateSection, experimentSection, articlesSection];
+            allSections.forEach(section => {
+                if (section === sectionToShow) {
+                    section.classList.remove('hidden');
+                } else {
+                    section.classList.add('hidden');
+                }
+            });
+        }
+
+        // Helper function to show/hide project grid vs. detail view
+        function showProjectGrid() {
+            projectGrid.classList.remove('hidden');
+            projectDetailView.classList.add('hidden');
+            // Show search bar and filter buttons when grid is visible using the new ID
+            if (projectControls) {
+                projectControls.classList.remove('hidden');
+            }
+        }
+
+        function showProjectDetail() {
+            projectGrid.classList.add('hidden');
+            projectDetailView.classList.remove('hidden');
+            // Hide search bar and filter buttons when detail is visible using the new ID
+            if (projectControls) {
+                projectControls.classList.add('hidden');
+            }
+        }
+
+
+        // --- Functions to display content for each section ---
+
+        // Function to display projects based on filter and search
+        function displayProjects(filter = 'all', searchTerm = '') {
+            projectGrid.innerHTML = ''; // Clear current projects
+            showProjectGrid(); // Ensure grid is visible
+
+            const filteredProjects = projects.filter(project => {
+                const matchesCategory = (filter === 'all' || project.category === filter);
+                const matchesSearch = project.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
+                                      project.description.toLowerCase().includes(searchTerm.toLowerCase()) ||
+                                      (project.fullArticle && project.fullArticle.toLowerCase().includes(searchTerm.toLowerCase())); // Search in full article too
+                return matchesCategory && matchesSearch;
+            });
+
+            if (filteredProjects.length === 0) {
+                projectGrid.innerHTML = '<p class="text-center text-gray-500 col-span-full">No projects found matching your criteria.</p>';
+                return;
+            }
+
+            filteredProjects.forEach(project => {
+                const projectCard = document.createElement('div');
+                projectCard.className = 'content-card rounded-lg overflow-hidden cursor-pointer border-2 border-transparent hover:border-accent-blue';
+                projectCard.setAttribute('data-category', project.category);
+                projectCard.setAttribute('data-project-id', project.id); // Add project ID for detail lookup
+                projectCard.innerHTML = `
+                    <img src="${project.image}" alt="${project.title}" class="w-full h-40 object-cover">
+                    <div class="p-4">
+                        <h3 class="font-bold text-lg mb-1 text-gray-100">${project.title}</h3>
+                        <p class="text-sm text-gray-400">${project.description}</p>
+                    </div>
+                `;
+                projectGrid.appendChild(projectCard);
+
+                // Add click listener to show project details
+                projectCard.addEventListener('click', () => {
+                    displayProjectDetails(project.id);
+                });
+            });
+        }
+
+        // Function to display detailed project view
+        function displayProjectDetails(projectId) {
+            const project = projects.find(p => p.id === projectId);
+            if (!project) {
+                console.error("Project not found:", projectId);
+                return;
+            }
+
+            detailProjectDemoPreview.src = project.demoPreviewImage || project.image; // Fallback to main image
+            detailProjectDemoPreview.alt = project.title + " Demo";
+            detailProjectTitle.textContent = project.title;
+
+            // Set full article content
+            detailProjectFullArticle.innerHTML = project.fullArticle || '<p class="text-gray-400">No detailed description available for this project.</p>';
+
+            // Set code snippet
+            detailProjectCodeSnippet.textContent = project.codeSnippet || '// No code snippet available for this project.';
+
+            // Set links
+            if (project.codeLink) {
+                detailProjectCodeLink.href = project.codeLink;
+                detailProjectCodeLink.classList.remove('hidden');
+            } else {
+                detailProjectCodeLink.classList.add('hidden');
+            }
+
+            if (project.demoLink) {
+                detailProjectDemoLink.href = project.demoLink;
+                detailProjectDemoLink.classList.remove('hidden');
+            } else {
+                detailProjectDemoLink.classList.add('hidden');
+            }
+
+            showProjectDetail(); // Show the detail view
+        }
+
+
+        // Function to display certificates
+        function displayCertificates() {
+            certificateGrid.innerHTML = ''; // Clear current certificates
+            certificates.forEach(cert => {
+                const certCard = document.createElement('div');
+                certCard.className = 'content-card rounded-lg overflow-hidden text-center border-2 border-transparent hover:border-accent-blue';
+                certCard.innerHTML = `
+                    <img src="${cert.image}" alt="${cert.title}" class="w-full h-40 object-cover">
+                    <div class="p-4">
+                        <h3 class="font-bold text-lg mb-1 text-gray-100">${cert.title}</h3>
+                        <p class="text-sm text-gray-400">${cert.issuer}</p>
+                        <p class="text-sm text-gray-500">${cert.date}</p>
+                    </div>
+                `;
+                certificateGrid.appendChild(certCard);
+            });
+        }
+
+        // Function to display experiments
+        function displayExperiments() {
+            experimentGrid.innerHTML = ''; // Clear current experiments
+            experiments.forEach(exp => {
+                const expCard = document.createElement('div');
+                expCard.className = 'content-card rounded-lg overflow-hidden cursor-pointer border-2 border-transparent hover:border-accent-blue';
+                expCard.innerHTML = `
+                    <img src="${exp.image}" alt="${exp.title}" class="w-full h-40 object-cover">
+                    <div class="p-4">
+                        <h3 class="font-bold text-lg mb-1 text-gray-100">${exp.title}</h3>
+                        <p class="text-sm text-gray-400">${exp.description}</p>
+                    </div>
+                `;
+                experimentGrid.appendChild(expCard);
+            });
+        }
+
+        // Function to display articles
+        function displayArticles() {
+            articlesList.innerHTML = ''; // Clear current articles
+            articles.forEach(article => {
+                const articleCard = document.createElement('div');
+                articleCard.className = 'content-card rounded-lg p-6 border-2 border-transparent hover:border-accent-blue';
+                articleCard.innerHTML = `
+                    <h3 class="font-bold text-xl mb-2 text-gray-100">${article.title}</h3>
+                    <p class="text-gray-400 mb-4">${article.summary}</p>
+                    <a href="${article.link}" target="_blank" class="text-accent-blue hover:underline font-semibold">Read More <i class="fas fa-external-link-alt ml-1 text-sm"></i></a>
+                `;
+                articlesList.appendChild(articleCard);
+            });
+        }
+
+
+        // --- Event Listeners for Navigation Buttons ---
+        homeButton.addEventListener('click', () => {
+            showSection(homeSection);
+        });
+
+        projectButton.addEventListener('click', () => {
+            showSection(projectSection);
+            showProjectGrid(); // Always show the grid when navigating to projects
+            displayProjects(); // Display all projects when navigating to the project section
+            projectSearchBar.value = ''; // Clear search bar on navigation
+            // Reset active filter button to 'All'
+            filterButtons.forEach(btn => {
+                if (btn.getAttribute('data-category') === 'all') {
+                    btn.classList.add('active');
+                } else {
+                    btn.classList.remove('active');
+                }
+            });
+        });
+
+        certificateButton.addEventListener('click', () => {
+            showSection(certificateSection);
+            displayCertificates(); // Display certificates when navigating
+        });
+
+        experimentButton.addEventListener('click', () => {
+            showSection(experimentSection);
+            displayExperiments(); // Display experiments when navigating
+        });
+
+        articlesButton.addEventListener('click', () => {
+            showSection(articlesSection);
+            displayArticles(); // Display articles when navigating
+        });
+
+        // Event listener for all general back buttons (back to home)
+        backButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                showSection(homeSection);
+            });
+        });
+
+        // Event listener for "Back to Projects" button within project detail view
+        backToProjectsGridButton.addEventListener('click', () => {
+            showProjectGrid();
+        });
+
+
+        // --- Event Listeners for Project Filters and Search ---
+        filterButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                // Remove active class from all project filter buttons
+                filterButtons.forEach(btn => btn.classList.remove('active'));
+                // Add active class to the clicked button
+                button.classList.add('active');
+                const category = button.getAttribute('data-category');
+                const searchTerm = projectSearchBar.value;
+                displayProjects(category, searchTerm);
+            });
+        });
+
+        projectSearchBar.addEventListener('input', () => {
+            const activeFilterButton = document.querySelector('.filter-button.active');
+            const category = activeFilterButton ? activeFilterButton.getAttribute('data-category') : 'all';
+            const searchTerm = projectSearchBar.value;
+            displayProjects(category, searchTerm);
+        });
+
+
+        // --- Initial Load ---
+        document.addEventListener('DOMContentLoaded', () => {
+            showSection(homeSection); // Show home section by default
+        });
+    </script>
 </body>
 </html>
